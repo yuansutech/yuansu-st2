@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuansu · 生态官网2</title>
+<meta name="description" content="Yuansu 生态官网·副站 —— 元素论坛、联机内网穿透工具。开源、免费、无需注册。">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --brand: #ff8400;
+    --brand-deep: #e67600;
+    --brand-soft: #fff5eb;
+    --brand-line: #ffe0c0;
+    --ink: #1a1a1a;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --ink-5: #bbb;
+    --line: #eaeaea;
+    --bg: #fff;
+    --bg-soft: #fafafa;
+    --dark: #2d2d2d;
+  }
+
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: var(--ink-2); text-decoration: none; transition: color .2s; }
+  a:hover { color: var(--brand); }
+  ul, ol { list-style: none; }
+  img { display: block; max-width: 100%; }
+
+  .container {
+    width: 1200px;
+    max-width: 94%;
+    margin: 0 auto;
+  }
+
+  /* ===== 滚动淡入 ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity .8s cubic-bezier(.22,.61,.36,1),
+                transform .8s cubic-bezier(.22,.61,.36,1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: .1s; }
+  .delay-2 { transition-delay: .2s; }
+  .delay-3 { transition-delay: .3s; }
+
+  /* ===== 顶部通栏 ===== */
+  .top-tip {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-3);
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 0;
+  }
+  .top-tip b { color: var(--brand); }
+  .top-tip a {
+    color: #1a6dff;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+  .top-tip a:hover { color: #0052cc; text-decoration: underline; }
+
+  /* ===== 导航 ===== */
+  nav {
+    border-bottom: 1px solid var(--line);
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.06); }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .brand .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+    background: linear-gradient(135deg, #ff8400, #ffb266);
+  }
+
+  .brand:hover .avatar { transform: rotate(-8deg) scale(1.08); }
+
+  .brand small {
+    font-size: 13px;
+    color: var(--ink-4);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    font-size: 15px;
+    color: #555;
+  }
+
+  .nav-links a { position: relative; padding: 8px 0; }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--brand);
+    transition: width .25s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    display: inline-block;
+    background: var(--brand);
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 9px 26px;
+    border-radius: 6px;
+    transition: background .2s, transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover {
+    background: var(--brand-deep);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255,132,0,.3);
+  }
+
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+  }
+
+  /* ===== 通用区块标题 ===== */
+  .section-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--brand);
+    background: var(--brand-soft);
+    border: 1px solid var(--brand-line);
+    padding: 2px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: .5px;
+  }
+  .section-sub {
+    font-size: 15px;
+    color: var(--ink-4);
+    max-width: 700px;
+    margin-bottom: 10px;
+  }
+  section { padding: 70px 0; }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 60px 0 70px;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -160px;
+    right: -160px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,132,0,.07), transparent 70%);
+    pointer-events: none;
+    animation: heroGlow 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroGlow {
+    0%   { transform: scale(1) translate(0,0); opacity: .6; }
+    100% { transform: scale(1.25) translate(-24px,24px); opacity: 1; }
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+
+  .hero h1 .grad {
+    color: var(--brand);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero h1 .grad::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    width: 100%;
+    height: 8px;
+    background: rgba(255,132,0,.15);
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .hero p.lead {
+    font-size: 16px;
+    color: var(--ink-3);
+    margin-bottom: 30px;
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--brand);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 38px;
+    border-radius: 6px;
+    transition: background .2s, transform .2s, box-shadow .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+    transition: left .5s;
+  }
+  .btn-primary:hover {
+    background: var(--brand-deep);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(255,132,0,.35);
+  }
+  .btn-primary:hover::after { left: 100%; }
+
+  .btn-ghost {
+    display: inline-block;
+    background: #fff;
+    color: var(--ink-3);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 13px 30px;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    transition: all .25s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255,132,0,.12);
+  }
+
+  .hero-note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-5);
+  }
+
+  /* 终端窗口 */
+  .term {
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #333;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s;
+  }
+  .term:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.18);
+  }
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: #2a2a2a;
+    border-bottom: 1px solid #3a3a3a;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
+  .term-title {
+    margin-left: 8px;
+    font-size: 12px;
+    color: #888;
+    font-family: Consolas, monospace;
+  }
+  .term-body {
+    padding: 20px 22px 26px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    min-height: 280px;
+    color: #ddd;
+    line-height: 1.7;
+  }
+  .term-body .u { color: #a0b4d0; }
+  .term-body .ai { color: #8fd4a8; }
+  .term-body .meta { color: #777; font-size: 12.5px; }
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: #8fd4a8;
+    vertical-align: -2px;
+    margin-left: 2px;
+    animation: blink .8s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ===== 数据条 ===== */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 30px 20px;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
+    transition: box-shadow .3s;
+  }
+  .stats:hover { box-shadow: 0 12px 32px rgba(0,0,0,.07); }
+
+  @media (max-width: 820px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat { text-align: center; }
+  .stat .num {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--brand);
+  }
+  .stat .lbl {
+    font-size: 13px;
+    color: var(--ink-4);
+    margin-top: 4px;
+  }
+
+  /* ===== 关于 ===== */
+  .about {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 30px;
+  }
+  @media (max-width: 880px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  .about-quote {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--brand);
+    border-radius: 6px;
+    padding: 24px 28px;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .about-quote:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,0,0,.06);
+  }
+  .about-quote b { color: #222; }
+
+  .about-list li {
+    position: relative;
+    padding: 10px 0 10px 24px;
+    color: #555;
+    font-size: 15px;
+    border-bottom: 1px dashed var(--line);
+    transition: padding-left .25s, color .25s;
+  }
+  .about-list li:hover { padding-left: 32px; color: var(--brand); }
+  .about-list li:last-child { border-bottom: none; }
+  .about-list li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    top: 10px;
+    color: var(--brand);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    transition: transform .25s;
+  }
+  .about-list li:hover::before { transform: scale(1.4); }
+
+  /* ===== 服务入口网格 ===== */
+  .services { background: #fff; }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 720px) {
+    .service-grid { grid-template-columns: 1fr; }
+  }
+
+  .service {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .25s, box-shadow .25s, transform .25s;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+  }
+
+  .service::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brand), #ffb266);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s cubic-bezier(.22,.61,.36,1);
+  }
+  .service:hover {
+    border-color: var(--brand);
+    box-shadow: 0 12px 30px rgba(255,132,0,.1);
+    transform: translateY(-4px);
+  }
+  .service:hover::after { transform: scaleX(1); }
+
+  .service-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .service-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--brand-soft);
+    color: var(--brand);
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), background .25s;
+    flex-shrink: 0;
+  }
+  .service:hover .service-ico {
+    transform: rotate(-8deg) scale(1.1);
+    background: #ffe8d1;
+  }
+  .service-ico svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .service-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .service-badge.on {
+    color: #2e9e5b;
+    background: #e8f7ee;
+    border: 1px solid #b8e6c8;
+  }
+
+  .service h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .service .s-url {
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    color: var(--ink-5);
+    word-break: break-all;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    transition: color .25s;
+  }
+  .service:hover .s-url { color: var(--brand); }
+
+  .service .s-desc {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .service .s-go {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brand);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all .3s cubic-bezier(.22,.61,.36,1);
+  }
+  .service:hover .s-go { opacity: 1; transform: translateX(0); }
+
+  /* ===== 快捷目录 ===== */
+  .quick-jump {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .quick-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+  .quick-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    transition: all .25s;
+  }
+  .quick-list a:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,132,0,.12);
+  }
+  .quick-list a .n {
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    color: var(--ink-5);
+    transition: color .25s;
+  }
+  .quick-list a:hover .n { color: var(--brand); }
+
+  /* ===== 生态地图 ===== */
+  .map { background: #fff; }
+
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+  @media (max-width: 920px) {
+    .map-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .map-grid { grid-template-columns: 1fr; }
+  }
+
+  .map-node {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 18px;
+    transition: all .25s;
+  }
+  .map-node:hover {
+    background: #fff;
+    border-color: var(--brand);
+    box-shadow: 0 10px 24px rgba(255,132,0,.1);
+    transform: translateY(-3px);
+  }
+  .map-node .mn-cat {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--brand);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .map-node h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .map-node p {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.7;
+  }
+
+  /* ===== FAQ ===== */
+  .faq {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+  }
+  .faq-list {
+    margin-top: 36px;
+    max-width: 880px;
+  }
+  details {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 24px;
+    margin-bottom: 12px;
+    transition: border-color .25s, box-shadow .25s;
+  }
+  details:hover {
+    border-color: var(--brand);
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+  }
+  details[open] {
+    border-color: var(--brand);
+    box-shadow: 0 8px 24px rgba(255,132,0,.08);
+  }
+  summary {
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--ink);
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    font-size: 20px;
+    color: var(--brand);
+    font-weight: 400;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+
+  details .ans {
+    margin-top: 12px;
+    font-size: 14.5px;
+    color: var(--ink-3);
+    line-height: 1.8;
+    animation: ansIn .35s ease;
+  }
+  @keyframes ansIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== CTA ===== */
+  .cta {
+    background: #fff;
+  }
+  .cta-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow .35s;
+  }
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,132,0,.08), transparent 70%);
+    pointer-events: none;
+    animation: dlGlow 6s ease-in-out infinite alternate;
+  }
+  @keyframes dlGlow {
+    0%   { transform: scale(1) translate(0,0); opacity: .5; }
+    100% { transform: scale(1.3) translate(-30px,30px); opacity: 1; }
+  }
+  .cta-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,.08); }
+
+  .cta-card h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .cta-card p {
+    font-size: 16px;
+    color: var(--ink-3);
+    margin: 0 auto 32px;
+    max-width: 640px;
+    line-height: 1.8;
+    position: relative;
+  }
+  .cta-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  /* ===== 页脚 ===== */
+  footer {
+    background: var(--dark);
+    color: #999;
+    padding: 44px 0 34px;
+    font-size: 13.5px;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .footer-brand img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .footer-brand:hover img { transform: rotate(-8deg) scale(1.1); }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+  }
+  .footer-links a {
+    color: #aaa;
+    transition: color .2s, transform .2s;
+    display: inline-block;
+  }
+  .footer-links a:hover {
+    color: var(--brand);
+    transform: translateY(-2px);
+  }
+  footer a:hover { color: var(--brand); }
+
+  /* ===== 回到顶部 ===== */
+  .back-top {
+    position: fixed;
+    right: 28px;
+    bottom: 36px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition: opacity .3s, visibility .3s, transform .3s, background .2s, box-shadow .2s;
+    z-index: 99;
+    box-shadow: 0 6px 20px rgba(255,132,0,.35);
+    border: none;
+    outline: none;
+  }
+  .back-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .back-top:hover {
+    background: var(--brand-deep);
+    box-shadow: 0 10px 26px rgba(255,132,0,.5);
+    transform: translateY(-3px);
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部通栏 -->
+<div class="top-tip">
+  🎉 <b>Yuansu 生态·副站</b> —— 元素论坛、联机内网穿透工具，全部服务一站直达！
+  <a href="#services">查看全部 →</a>
+</div>
+
+<!-- 导航 -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">
+      <img src="tx.png" alt="Yuansu" class="avatar" onerror="this.style.display='none'">
+      Yuansu <small>生态·副站</small>
+    </a>
+    <div class="nav-links">
+      <a href="#about">关于</a>
+      <a href="#services">服务</a>
+      <a href="#quick">目录</a>
+      <a href="#map">生态</a>
+      <a href="#faq">常见问题</a>
+    </div>
+    <a class="nav-cta" href="#services">打开服务</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="fade-up">
+      <span class="section-tag">Yuansu 生态·副站</span>
+      <h1>专注、纯粹的<br><span class="grad">数字工具生态</span></h1>
+      <p class="lead">
+        元素论坛、联机内网穿透工具……所有服务汇总在一个页面。开源、免费、无需注册，
+        打开浏览器即用。
+      </p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#services">立即浏览服务</a>
+        <a class="btn-ghost" href="#about">了解更多 →</a>
+      </div>
+      <p class="hero-note">全部服务基于 GitHub Pages 部署 · 完全免费</p>
+    </div>
+
+    <div class="term fade-up delay-2">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="term-title">yuansu — ecosystem</span>
+      </div>
+      <div class="term-body">
+        <div class="meta">Yuansu 生态已加载 · 共 2 个服务</div>
+        <div style="height:8px"></div>
+        <div class="u">你： 有什么服务？</div>
+        <div class="meta">正在检索生态目录...<span class="cursor"></span></div>
+        <div class="ai">Yuansu：元素论坛、联机内网穿透工具，都在这里<span class="cursor" id="heroCursor"></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 数据条 -->
+<div class="container">
+  <div class="stats fade-up">
+    <div class="stat">
+      <div class="num" data-count="2">0</div>
+      <div class="lbl">服务总数</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-count="2">0</div>
+      <div class="lbl">活跃服务</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-count="0">0</div>
+      <div class="lbl">归档项目</div>
+    </div>
+    <div class="stat">
+      <div class="num">0</div>
+      <div class="lbl">元费用，完全免费</div>
+    </div>
+  </div>
+</div>
+
+<!-- 关于 -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-tag">ABOUT</span>
+      <h2 class="section-title">关于 Yuansu 生态</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-quote fade-up delay-1">
+        Yuansu 是一组<strong>独立的、开源的数字工具集合</strong>，
+        涵盖论坛社区、联机工具等方向。<br><br>
+        所有服务都部署在 GitHub Pages 平台上，
+        没有中心服务器，没有账号体系，没有广告。<br><br>
+        它本质上是一组"打开即用"的网页小工具，
+        只是为了方便，把它们汇总到了一个页面里。
+      </div>
+      <ul class="about-list fade-up delay-2">
+        <li>全部服务开源，代码可查</li>
+        <li>无需注册，打开即用</li>
+        <li>数据自己掌控，不上传第三方服务器</li>
+        <li>国内 / 海外多入口，访问可选</li>
+        <li>持续更新，废弃项目保留归档</li>
+        <li>无广告、无追踪、无弹窗</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 服务入口 -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-tag">ACTIVE SERVICES</span>
+      <h2 class="section-title">全部活跃服务</h2>
+      <p class="section-sub">2 个正在维护的服务，涵盖论坛社区、联机工具等方向。</p>
+    </div>
+
+    <div class="service-grid">
+
+      <a href="https://yuansutech.github.io/yuansu-bbs/" target="_blank" rel="noopener" class="service fade-up">
+        <div class="service-head">
+          <div class="service-ico">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="service-badge on">活跃</span>
+        </div>
+        <h3>Yuansu BBS · 元素论坛</h3>
+        <div class="s-url">yuansutech.github.io/yuansu-bbs/</div>
+        <div class="s-desc">元素论坛，一个轻量、简洁的社区讨论平台，开源、免费、无需注册。</div>
+        <div class="s-go">访问服务 →</div>
+      </a>
+
+      <a href="https://yuansutech.github.io/yuansu-vpn/" target="_blank" rel="noopener" class="service fade-up delay-1">
+        <div class="service-head">
+          <div class="service-ico">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="16" r="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <span class="service-badge on">活跃</span>
+        </div>
+        <h3>Yuansu VPN · 联机内网穿透工具</h3>
+        <div class="s-url">yuansutech.github.io/yuansu-vpn/</div>
+        <div class="s-desc">开源、免费的 Minecraft 联机内网穿透工具，安装版 / 便携版任选，打开即用。</div>
+        <div class="s-go">访问服务 →</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- 快捷目录 -->
+<section class="quick-jump" id="quick">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-tag">QUICK INDEX</span>
+      <h2 class="section-title">快捷目录</h2>
+      <p class="section-sub">按序号快速定位服务，或按分类浏览。</p>
+    </div>
+    <div class="quick-list fade-up delay-1">
+      <a href="#services"><span class="n">01</span>活跃服务</a>
+      <a href="#services"><span class="n">02</span>论坛 / 联机工具</a>
+      <a href="#map"><span class="n">03</span>生态地图</a>
+      <a href="#faq"><span class="n">04</span>常见问题</a>
+    </div>
+  </div>
+</section>
+
+<!-- 生态地图 -->
+<section class="map" id="map">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-tag">ECOSYSTEM MAP</span>
+      <h2 class="section-title">生态地图</h2>
+      <p class="section-sub">Yuansu 服务覆盖的几个方向，每个方向都有对应的工具。</p>
+    </div>
+
+    <div class="map-grid">
+      <div class="map-node fade-up">
+        <div class="mn-cat">COMMUNITY</div>
+        <h4>论坛社区</h4>
+        <p>元素论坛，轻量、简洁的社区讨论平台，支持发帖、回复、交流。</p>
+      </div>
+      <div class="map-node fade-up delay-1">
+        <div class="mn-cat">TOOLS</div>
+        <h4>联机工具</h4>
+        <p>Yuansu VPN，Minecraft 联机内网穿透，安装版 / 便携版任选。</p>
+      </div>
+      <div class="map-node fade-up delay-2">
+        <div class="mn-cat">OPEN SOURCE</div>
+        <h4>开源免费</h4>
+        <p>全部服务开源，无广告，无追踪。</p>
+      </div>
+      <div class="map-node fade-up delay-3">
+        <div class="mn-cat">GITHUB PAGES</div>
+        <h4>轻量部署</h4>
+        <p>基于 GitHub Pages，无需服务器，访问快速稳定。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">常见问题</h2>
+    </div>
+    <div class="faq-list">
+      <details class="fade-up">
+        <summary>Yuansu 是什么？</summary>
+        <div class="ans">Yuansu 是一组独立的、开源的数字工具集合，目前包含元素论坛和联机内网穿透工具。所有服务都部署在 GitHub Pages 平台上，没有中心服务器。</div>
+      </details>
+      <details class="fade-up delay-1">
+        <summary>需要注册账号吗？</summary>
+        <div class="ans">大部分服务无需注册，打开即用。元素论坛支持匿名浏览和发帖，联机工具也不需要注册 Yuansu 账号。</div>
+      </details>
+      <details class="fade-up delay-2">
+        <summary>服务是免费的吗？</summary>
+        <div class="ans">全部免费。所有服务都基于免费平台部署，没有付费墙，没有广告，没有隐藏收费。</div>
+      </details>
+      <details class="fade-up delay-2">
+        <summary>数据安全吗？</summary>
+        <div class="ans">所有数据都直接与 GitHub 等平台交互，不经过 Yuansu 的服务器（因为没有服务器）。联机工具基于 Cloudflare 隧道，数据点对点传输。</div>
+      </details>
+      <details class="fade-up delay-3">
+        <summary>为什么访问速度不一样？</summary>
+        <div class="ans">不同服务的部署平台相同（GitHub Pages），但国内和海外的访问速度会有差异。可以根据网络环境选择合适的时间访问。</div>
+      </details>
+      <details class="fade-up delay-3">
+        <summary>会一直维护吗？</summary>
+        <div class="ans">活跃服务会持续更新。如果某个服务因为平台限制无法继续，会保留记录或迁移到新的地址。</div>
+      </details>
+      <details class="fade-up delay-3">
+        <summary>可以贡献代码吗？</summary>
+        <div class="ans">欢迎。所有服务都是开源的，可以在 GitHub 上找到对应仓库，提交 Issue 或 PR。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-card fade-up">
+      <h2>准备好开始了吗？</h2>
+      <p>无需注册，无需下载，打开浏览器就能用。先从论坛或联机工具开始吧。</p>
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://yuansutech.github.io/yuansu-bbs/" target="_blank" rel="noopener">打开论坛</a>
+        <a class="btn-ghost" href="https://yuansutech.github.io/yuansu-vpn/" target="_blank" rel="noopener">联机工具 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="tx.png" alt="Yuansu" onerror="this.style.display='none'">
+      Yuansu · 生态官网2
+    </div>
+    <div class="footer-links">
+      <a href="#services">服务</a>
+      <a href="#map">生态</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div>© 2026 Yuansu · 独立开发的开源工具集合</div>
+  </div>
+</footer>
+
+<!-- 回到顶部 -->
+<button class="back-top" id="backTop" aria-label="回到顶部">↑</button>
+
+<script>
+  /* ===== Hero 打字机 ===== */
+  (function () {
+    var el = document.getElementById('heroCursor');
+    if (!el) return;
+    var text = "，元素论坛、联机内网穿透工具，全部汇总在一个页面。";
+    var i = 0;
+    var parent = el.parentNode;
+
+    function type() {
+      if (i < text.length) {
+        var s = document.createElement('span');
+        s.textContent = text[i++];
+        parent.insertBefore(s, el);
+        setTimeout(type, "，。？！".indexOf(text[i - 1]) > -1 ? 240 : 70);
+      } else {
+        setTimeout(del, 2600);
+      }
+    }
+
+    function del() {
+      var spans = parent.querySelectorAll('span:not(#heroCursor)');
+      if (spans.length) {
+        spans[spans.length - 1].remove();
+        setTimeout(del, 24);
+      } else {
+        i = 0;
+        setTimeout(type, 400);
+      }
+    }
+    setTimeout(type, 900);
+  })();
+
+  /* ===== 滚动淡入 ===== */
+  (function () {
+    var els = document.querySelectorAll('.fade-up');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+
+  /* ===== 数字滚动 ===== */
+  (function () {
+    var nums = document.querySelectorAll('.stat .num[data-count]');
+    if (!nums.length || !('IntersectionObserver' in window)) return;
+
+    function animate(el) {
+      var target = parseInt(el.dataset.count, 10);
+      var duration = 1200;
+      var start = null;
+
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 4);
+        el.textContent = Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+
+    nums.forEach(function (n) { obs.observe(n); });
+  })();
+
+  /* ===== 导航阴影 & 回顶 ===== */
+  (function () {
+    var nav = document.getElementById('nav');
+    var backTop = document.getElementById('backTop');
+
+    function onScroll() {
+      var y = window.scrollY || window.pageYOffset;
+      if (y > 10) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+
+      if (y > 400) backTop.classList.add('show');
+      else backTop.classList.remove('show');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    backTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  /* ===== 平滑锚点 ===== */
+  (function () {
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var id = this.getAttribute('href');
+        if (id === '#' || id === '#top') return;
+        var target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
