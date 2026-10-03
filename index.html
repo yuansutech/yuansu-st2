@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yuansu · 生态官网2</title>
-<meta name="description" content="Yuansu 生态官网·副站 —— 元素论坛、联机内网穿透工具。开源、免费、无需注册。">
+<meta name="description" content="Yuansu 生态官网·副站 —— 元素论坛、联机内网穿透工具、网页解谜 ARG。开源、免费、无需注册。">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -45,7 +45,6 @@
     margin: 0 auto;
   }
 
-  /* ===== 滚动淡入 ===== */
   .fade-up {
     opacity: 0;
     transform: translateY(36px);
@@ -57,7 +56,6 @@
   .delay-2 { transition-delay: .2s; }
   .delay-3 { transition-delay: .3s; }
 
-  /* ===== 顶部通栏 ===== */
   .top-tip {
     background: var(--bg-soft);
     border-bottom: 1px solid var(--line);
@@ -74,7 +72,6 @@
   }
   .top-tip a:hover { color: #0052cc; text-decoration: underline; }
 
-  /* ===== 导航 ===== */
   nav {
     border-bottom: 1px solid var(--line);
     background: #fff;
@@ -162,7 +159,6 @@
     .nav-links { display: none; }
   }
 
-  /* ===== 通用区块标题 ===== */
   .section-tag {
     display: inline-block;
     font-size: 12px;
@@ -191,7 +187,6 @@
   }
   section { padding: 70px 0; }
 
-  /* ===== Hero ===== */
   .hero {
     padding: 60px 0 70px;
     background: var(--bg-soft);
@@ -325,7 +320,6 @@
     color: var(--ink-5);
   }
 
-  /* 终端窗口 */
   .term {
     background: #1e1e1e;
     border-radius: 10px;
@@ -378,7 +372,6 @@
   }
   @keyframes blink { 50% { opacity: 0; } }
 
-  /* ===== 数据条 ===== */
   .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -410,7 +403,6 @@
     margin-top: 4px;
   }
 
-  /* ===== 关于 ===== */
   .about {
     background: var(--bg-soft);
     border-top: 1px solid var(--line);
@@ -466,7 +458,6 @@
   }
   .about-list li:hover::before { transform: scale(1.4); }
 
-  /* ===== 服务入口网格 ===== */
   .services { background: #fff; }
 
   .service-grid {
@@ -559,6 +550,11 @@
     background: #e8f7ee;
     border: 1px solid #b8e6c8;
   }
+  .service-badge.hot {
+    color: #c96000;
+    background: #fff3e6;
+    border: 1px solid #ffd9a8;
+  }
 
   .service h3 {
     font-size: 17px;
@@ -599,7 +595,6 @@
   }
   .service:hover .s-go { opacity: 1; transform: translateX(0); }
 
-  /* ===== 快捷目录 ===== */
   .quick-jump {
     background: var(--bg-soft);
     border-top: 1px solid var(--line);
@@ -638,7 +633,6 @@
   }
   .quick-list a:hover .n { color: var(--brand); }
 
-  /* ===== 生态地图 ===== */
   .map { background: #fff; }
 
   .map-grid {
@@ -687,7 +681,6 @@
     line-height: 1.7;
   }
 
-  /* ===== FAQ ===== */
   .faq {
     background: var(--bg-soft);
     border-top: 1px solid var(--line);
@@ -744,7 +737,6 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ===== CTA ===== */
   .cta {
     background: #fff;
   }
@@ -799,7 +791,6 @@
     position: relative;
   }
 
-  /* ===== 页脚 ===== */
   footer {
     background: var(--dark);
     color: #999;
@@ -845,7 +836,6 @@
   }
   footer a:hover { color: var(--brand); }
 
-  /* ===== 回到顶部 ===== */
   .back-top {
     position: fixed;
     right: 28px;
@@ -885,7 +875,7 @@
 
 <!-- 顶部通栏 -->
 <div class="top-tip">
-  🎉 <b>Yuansu 生态·副站</b> —— 元素论坛、联机内网穿透工具，全部服务一站直达！
+  🎉 <b>Yuansu 生态·副站</b> —— 元素论坛、联机内网穿透工具、网页解谜 ARG，全部服务一站直达！
   <a href="#services">查看全部 →</a>
 </div>
 
@@ -902,6 +892,7 @@
       <a href="#quick">目录</a>
       <a href="#map">生态</a>
       <a href="#faq">常见问题</a>
+      <a href="https://yuansutech.github.io/order-drive-arg1/list.html" target="_blank" rel="noopener">ARG</a>
     </div>
     <a class="nav-cta" href="#services">打开服务</a>
   </div>
@@ -914,7 +905,7 @@
       <span class="section-tag">Yuansu 生态·副站</span>
       <h1>专注、纯粹的<br><span class="grad">数字工具生态</span></h1>
       <p class="lead">
-        元素论坛、联机内网穿透工具……所有服务汇总在一个页面。开源、免费、无需注册，
+        元素论坛、联机内网穿透工具、网页解谜 ARG……所有服务汇总在一个页面。开源、免费、无需注册，
         打开浏览器即用。
       </p>
       <div class="hero-btns">
@@ -930,11 +921,11 @@
         <span class="term-title">yuansu — ecosystem</span>
       </div>
       <div class="term-body">
-        <div class="meta">Yuansu 生态已加载 · 共 2 个服务</div>
+        <div class="meta">Yuansu 生态已加载 · 共 3 个服务</div>
         <div style="height:8px"></div>
         <div class="u">你： 有什么服务？</div>
         <div class="meta">正在检索生态目录...<span class="cursor"></span></div>
-        <div class="ai">Yuansu：元素论坛、联机内网穿透工具，都在这里<span class="cursor" id="heroCursor"></span></div>
+        <div class="ai">Yuansu：元素论坛、联机工具、网页解谜 ARG，都在这里<span class="cursor" id="heroCursor"></span></div>
       </div>
     </div>
   </div>
@@ -944,11 +935,11 @@
 <div class="container">
   <div class="stats fade-up">
     <div class="stat">
-      <div class="num" data-count="2">0</div>
+      <div class="num" data-count="3">0</div>
       <div class="lbl">服务总数</div>
     </div>
     <div class="stat">
-      <div class="num" data-count="2">0</div>
+      <div class="num" data-count="3">0</div>
       <div class="lbl">活跃服务</div>
     </div>
     <div class="stat">
@@ -972,7 +963,7 @@
     <div class="about-grid">
       <div class="about-quote fade-up delay-1">
         Yuansu 是一组<strong>独立的、开源的数字工具集合</strong>，
-        涵盖论坛社区、联机工具等方向。<br><br>
+        涵盖论坛社区、联机工具、网页解谜等方向。<br><br>
         所有服务都部署在 GitHub Pages 平台上，
         没有中心服务器，没有账号体系，没有广告。<br><br>
         它本质上是一组"打开即用"的网页小工具，
@@ -996,7 +987,7 @@
     <div class="fade-up">
       <span class="section-tag">ACTIVE SERVICES</span>
       <h2 class="section-title">全部活跃服务</h2>
-      <p class="section-sub">2 个正在维护的服务，涵盖论坛社区、联机工具等方向。</p>
+      <p class="section-sub">3 个正在维护的服务，涵盖论坛社区、联机工具、网页解谜等方向。</p>
     </div>
 
     <div class="service-grid">
@@ -1027,6 +1018,19 @@
         <div class="s-go">访问服务 →</div>
       </a>
 
+      <a href="https://yuansutech.github.io/order-drive-arg1/list.html" target="_blank" rel="noopener" class="service fade-up delay-2">
+        <div class="service-head">
+          <div class="service-ico">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <span class="service-badge hot">新品</span>
+        </div>
+        <h3>旧硬盘 QC-2009 · 网页解谜 ARG</h3>
+        <div class="s-url">yuansutech.github.io/order-drive-arg1/list.html</div>
+        <div class="s-desc">一个纯网页的叙事解谜游戏。模拟 2009 年的旧硬盘，翻阅文件、拼出密码、找到失踪主持人留下的最后一段录音。四种语言。</div>
+        <div class="s-go">访问服务 →</div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -1042,8 +1046,9 @@
     <div class="quick-list fade-up delay-1">
       <a href="#services"><span class="n">01</span>活跃服务</a>
       <a href="#services"><span class="n">02</span>论坛 / 联机工具</a>
-      <a href="#map"><span class="n">03</span>生态地图</a>
-      <a href="#faq"><span class="n">04</span>常见问题</a>
+      <a href="https://yuansutech.github.io/order-drive-arg1/list.html" target="_blank" rel="noopener"><span class="n">03</span>网页解谜 ARG</a>
+      <a href="#map"><span class="n">04</span>生态地图</a>
+      <a href="#faq"><span class="n">05</span>常见问题</a>
     </div>
   </div>
 </section>
@@ -1069,14 +1074,14 @@
         <p>Yuansu VPN，Minecraft 联机内网穿透，安装版 / 便携版任选。</p>
       </div>
       <div class="map-node fade-up delay-2">
-        <div class="mn-cat">OPEN SOURCE</div>
-        <h4>开源免费</h4>
-        <p>全部服务开源，无广告，无追踪。</p>
+        <div class="mn-cat">ARG / WIG</div>
+        <h4>网页解谜</h4>
+        <p>《旧硬盘 QC-2009》，模拟操作系统的叙事解谜游戏，四种语言。</p>
       </div>
       <div class="map-node fade-up delay-3">
-        <div class="mn-cat">GITHUB PAGES</div>
-        <h4>轻量部署</h4>
-        <p>基于 GitHub Pages，无需服务器，访问快速稳定。</p>
+        <div class="mn-cat">OPEN SOURCE</div>
+        <h4>开源免费</h4>
+        <p>全部服务开源，无广告，无追踪。基于 GitHub Pages 轻量部署。</p>
       </div>
     </div>
   </div>
@@ -1092,7 +1097,7 @@
     <div class="faq-list">
       <details class="fade-up">
         <summary>Yuansu 是什么？</summary>
-        <div class="ans">Yuansu 是一组独立的、开源的数字工具集合，目前包含元素论坛和联机内网穿透工具。所有服务都部署在 GitHub Pages 平台上，没有中心服务器。</div>
+        <div class="ans">Yuansu 是一组独立的、开源的数字工具集合，目前包含元素论坛、联机内网穿透工具和网页解谜 ARG。所有服务都部署在 GitHub Pages 平台上，没有中心服务器。</div>
       </details>
       <details class="fade-up delay-1">
         <summary>需要注册账号吗？</summary>
@@ -1104,7 +1109,7 @@
       </details>
       <details class="fade-up delay-2">
         <summary>数据安全吗？</summary>
-        <div class="ans">所有数据都直接与 GitHub 等平台交互，不经过 Yuansu 的服务器（因为没有服务器）。联机工具基于 Cloudflare 隧道，数据点对点传输。</div>
+        <div class="ans">所有数据都直接与 GitHub 等平台交互，不经过 Yuansu 的服务器（因为没有服务器）。联机工具基于 Cloudflare 隧道，数据点对点传输。解谜游戏的进度存在你本地浏览器里。</div>
       </details>
       <details class="fade-up delay-3">
         <summary>为什么访问速度不一样？</summary>
@@ -1113,6 +1118,10 @@
       <details class="fade-up delay-3">
         <summary>会一直维护吗？</summary>
         <div class="ans">活跃服务会持续更新。如果某个服务因为平台限制无法继续，会保留记录或迁移到新的地址。</div>
+      </details>
+      <details class="fade-up delay-3">
+        <summary>《旧硬盘 QC-2009》是什么？</summary>
+        <div class="ans">这是一个纯网页的叙事解谜游戏（WIG / ARG）。你捡到一块 2009 年的旧硬盘，在里面翻找一位失踪主持人的线索。支持中文、English、한국어、日本語四种语言，打开浏览器就能玩，大约 20 到 40 分钟通关。</div>
       </details>
       <details class="fade-up delay-3">
         <summary>可以贡献代码吗？</summary>
@@ -1127,10 +1136,11 @@
   <div class="container">
     <div class="cta-card fade-up">
       <h2>准备好开始了吗？</h2>
-      <p>无需注册，无需下载，打开浏览器就能用。先从论坛或联机工具开始吧。</p>
+      <p>无需注册，无需下载，打开浏览器就能用。先从论坛、联机工具或解谜游戏开始吧。</p>
       <div class="cta-btns">
         <a class="btn-primary" href="https://yuansutech.github.io/yuansu-bbs/" target="_blank" rel="noopener">打开论坛</a>
         <a class="btn-ghost" href="https://yuansutech.github.io/yuansu-vpn/" target="_blank" rel="noopener">联机工具 →</a>
+        <a class="btn-ghost" href="https://yuansutech.github.io/order-drive-arg1/list.html" target="_blank" rel="noopener">玩解谜 ARG →</a>
       </div>
     </div>
   </div>
@@ -1147,6 +1157,7 @@
       <a href="#services">服务</a>
       <a href="#map">生态</a>
       <a href="#faq">FAQ</a>
+      <a href="https://yuansutech.github.io/order-drive-arg1/list.html" target="_blank" rel="noopener">ARG</a>
       <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
     </div>
     <div>© 2026 Yuansu · 独立开发的开源工具集合</div>
@@ -1161,7 +1172,7 @@
   (function () {
     var el = document.getElementById('heroCursor');
     if (!el) return;
-    var text = "，元素论坛、联机内网穿透工具，全部汇总在一个页面。";
+    var text = "，元素论坛、联机工具、网页解谜 ARG，全部汇总在一个页面。";
     var i = 0;
     var parent = el.parentNode;
 
